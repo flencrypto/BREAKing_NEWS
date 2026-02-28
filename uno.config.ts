@@ -31,8 +31,8 @@ export default defineConfig({
     ],
   ],
   shortcuts: {
-    "color-base": "color-neutral-800 dark:color-neutral-300",
-    "bg-base": "bg-zinc-200 dark:bg-dark-600",
+    "color-base": "color-neutral-900 dark:color-neutral-100",
+    "bg-base": "bg-white dark:bg-neutral-950",
     "btn": "op50 hover:op85 cursor-pointer transition-all",
   },
   safelist: [
@@ -43,7 +43,7 @@ export default defineConfig({
   ],
   extendTheme: (theme) => {
     // @ts-expect-error >_<
-    theme.colors.primary = theme.colors.red
+    theme.colors.primary = theme.colors.neutral
     return theme
   },
 })
