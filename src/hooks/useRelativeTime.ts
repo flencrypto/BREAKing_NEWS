@@ -30,15 +30,16 @@ export function useRelativeTime(timestamp: string | number) {
   const [time, setTime] = useState<string>()
   const timer = useAtomValue(timerAtom)
   const visible = useVisibility()
+  const { language } = useLanguage()
 
   useEffect(() => {
     if (visible) {
-      const t = relativeTime(timestamp)
+      const t = relativeTime(timestamp, language)
       if (t) {
         setTime(t)
       }
     }
-  }, [timestamp, timer, visible])
+  }, [timestamp, timer, visible, language])
 
   return time
 }
