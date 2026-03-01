@@ -41,6 +41,7 @@ export function useSync() {
   const [primitiveMetadata, setPrimitiveMetadata] = useAtom(primitiveMetadataAtom)
   const { logout, login } = useLogin()
   const toaster = useToast()
+  const { language } = useLanguage()
 
   useDebounce(async () => {
     const fn = async () => {
@@ -48,10 +49,10 @@ export function useSync() {
         await uploadMetadata(primitiveMetadata)
       } catch (e: any) {
         if (e.statusCode !== 506) {
-          toaster("身份校验失败，无法同步，请重新登录", {
+          toaster(language === "zh" ? "身份校验失败，无法同步，请重新登录" : "Auth failed, unable to sync, please log in again", {
             type: "error",
             action: {
-              label: "登录",
+              label: language === "zh" ? "登录" : "Log in",
               onClick: login,
             },
           })
@@ -73,10 +74,10 @@ export function useSync() {
         }
       } catch (e: any) {
         if (e.statusCode !== 506) {
-          toaster("身份校验失败，无法同步，请重新登录", {
+          toaster(language === "zh" ? "身份校验失败，无法同步，请重新登录" : "Auth failed, unable to sync, please log in again", {
             type: "error",
             action: {
-              label: "登录",
+              label: language === "zh" ? "登录" : "Log in",
               onClick: login,
             },
           })

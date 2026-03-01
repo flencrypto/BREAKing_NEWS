@@ -15,6 +15,7 @@ import { motion } from "framer-motion"
 export function Menu() {
   const { loggedIn, login, logout, userInfo, enableLogin } = useLogin()
   const [shown, show] = useState(false)
+  const { language, toggleLanguage } = useLanguage()
   return (
     <span className="relative" onMouseEnter={() => show(true)} onMouseLeave={() => show(false)}>
       <span className="flex items-center scale-90">
@@ -55,16 +56,20 @@ export function Menu() {
                 ? (
                     <li onClick={logout}>
                       <span className="i-ph:sign-out-duotone inline-block" />
-                      <span>退出登录</span>
+                      <span>{language === "zh" ? "退出登录" : "Log out"}</span>
                     </li>
                   )
                 : (
                     <li onClick={login}>
                       <span className="i-ph:sign-in-duotone inline-block" />
-                      <span>Github 账号登录</span>
+                      <span>{language === "zh" ? "Github 账号登录" : "Sign in with GitHub"}</span>
                     </li>
                   ))}
               {/* <ThemeToggle /> */}
+              <li onClick={toggleLanguage} className="cursor-pointer [&_*]:cursor-pointer transition-all">
+                <span className="i-ph:translate-duotone inline-block" />
+                <span>{language === "zh" ? "Switch to English" : "切换为中文"}</span>
+              </li>
               <li onClick={() => window.open(Homepage)} className="cursor-pointer [&_*]:cursor-pointer transition-all">
                 <span className="i-ph:github-logo-duotone inline-block" />
                 <span>Star on Github </span>

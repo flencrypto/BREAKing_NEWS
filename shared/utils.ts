@@ -1,4 +1,4 @@
-export function relativeTime(timestamp: string | number) {
+export function relativeTime(timestamp: string | number, lang: "zh" | "en" = "zh") {
   if (!timestamp) return undefined
   const date = new Date(timestamp)
   if (Number.isNaN(date.getDay())) return undefined
@@ -7,6 +7,15 @@ export function relativeTime(timestamp: string | number) {
   const diffInSeconds = (now.getTime() - date.getTime()) / 1000
   const diffInMinutes = diffInSeconds / 60
   const diffInHours = diffInMinutes / 60
+
+  if (lang === "en") {
+    if (diffInSeconds < 60) return "just now"
+    if (diffInMinutes < 60) return `${Math.floor(diffInMinutes)}m ago`
+    if (diffInHours < 24) return `${Math.floor(diffInHours)}h ago`
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    return `${month}/${day}`
+  }
 
   if (diffInSeconds < 60) {
     return "刚刚"

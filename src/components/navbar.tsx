@@ -1,10 +1,11 @@
-import { fixedColumnIds, metadata } from "@shared/metadata"
+import { columns, fixedColumnIds } from "@shared/metadata"
 import { Link } from "@tanstack/react-router"
 import { currentColumnIDAtom } from "~/atoms"
 
 export function NavBar() {
   const currentId = useAtomValue(currentColumnIDAtom)
   const { toggle } = useSearchBar()
+  const { language } = useLanguage()
   return (
     <span className={$([
       "flex p-3 rounded-2xl bg-primary/1 text-sm",
@@ -19,7 +20,7 @@ export function NavBar() {
           "cursor-pointer transition-all",
         )}
       >
-        更多
+        {language === "zh" ? "更多" : "More"}
       </button>
       {fixedColumnIds.map(columnId => (
         <Link
@@ -31,7 +32,7 @@ export function NavBar() {
             currentId === columnId ? "color-primary font-bold" : "op-70 dark:op-90",
           )}
         >
-          {metadata[columnId].name}
+          {columns[columnId][language]}
         </Link>
       ))}
     </span>
